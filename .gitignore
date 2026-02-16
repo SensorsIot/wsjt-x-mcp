@@ -1,3 +1,6 @@
+.claude/*
+!.claude/skills/
+!.claude/commands/
 ~*
 TAGS
 tags
@@ -22,3 +25,13 @@ fnd
 lib/77bit/tmp
 lib/tmp
 lib/ftrsd
+
+
+# SSH keys - NEVER commit
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+*.ppk
+.ssh/
+CLAUDE.md
