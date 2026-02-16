@@ -39,3 +39,4 @@ USER dev
 
 # Set default working directory for SSH logins
 WORKDIR /workspaces/wsjt-x-mcp
+RUN echo 'cd /workspaces/wsjt-x-mcp 2>/dev/null' >> /home/dev/.bashrc
