@@ -35,8 +35,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# SSH quiet config
+RUN mkdir -p /home/dev/.ssh \
+    && printf 'Host *\n    StrictHostKeyChecking accept-new\n    LogLevel ERROR\n' > /home/dev/.ssh/config \
+    && chmod 700 /home/dev/.ssh \
+    && chmod 600 /home/dev/.ssh/config \
+    && chown -R dev:dev /home/dev/.ssh
+
 USER dev
 
 # Set default working directory for SSH logins
 WORKDIR /workspaces/wsjt-x-mcp
 RUN echo 'cd /workspaces/wsjt-x-mcp 2>/dev/null' >> /home/dev/.bashrc
+
+# tmux — terminal multiplexer for SSH sessions
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends tmux \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+USER dev
